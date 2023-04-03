@@ -1,13 +1,14 @@
-import { useEffect } from "react";
-import productsApi from "./api/productsApi";
+import React from "react";
+import Main from "./pages/Main";
+
 import "./App.css";
 
 function App() {
-  useEffect(() => {
-    productsApi().then((products) => console.log(products));
-  }, []);
-
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <Main />
+    </div>
+  );
 }
 
 export default App;

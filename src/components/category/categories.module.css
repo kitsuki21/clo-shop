@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav {
+  list-style: none;
+  display: flex;
+  padding: 0;
+  max-width: 900px;
+  justify-content: space-between;
+}
+
+.nav_elem {
+  width: 250px;
+  border: 2px solid rgb(89, 1, 171);
+  padding: 5px;
+  margin-right: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}

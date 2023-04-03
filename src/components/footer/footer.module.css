@@ -1,0 +1,26 @@
+.container_footer {
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  width: 100px;
+}
+
+.nav {
+  max-width: 600px;
+}
+
+.nav_elem {
+  display: flex;
+  align-items: center;
+  list-style: none;
+}
+
+.elem {
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+}

@@ -1,0 +1,29 @@
+.search {
+  position: relative;
+}
+
+input {
+  width: 200px;
+  height: 42px;
+  padding-left: 15px;
+  border-radius: 42px;
+  border: 2px solid rgb(89, 1, 171);
+  background: #f5f0e3;
+  outline: none;
+  transition: 0.3s linear;
+}
+input:focus {
+  width: 250px;
+}
+.button {
+  position: absolute;
+  top: 14px;
+  right: 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.img_search {
+  width: 20px;
+}
