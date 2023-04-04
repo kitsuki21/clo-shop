@@ -4,11 +4,15 @@ import Categories from "../components/category/Categories";
 import Products from "../components/products/Products";
 import Footer from "../components/footer/Footer";
 import productsApi from "../api/productsApi";
+import { useSelector } from "react-redux";
 
 const Main = () => {
   const [products, setProducts] = useState([]);
   const [searchValue, setSearchValue] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
+
+  const selectedCategory = useSelector(
+    (state) => state.selectedCategory.selectedCategory
+  );
 
   useEffect(() => {
     productsApi().then((products) => setProducts(products));
@@ -16,10 +20,6 @@ const Main = () => {
 
   const handleChangeSearchValue = (e) => {
     setSearchValue(e.target.value);
-  };
-
-  const handleClickCategory = (value) => () => {
-    setSelectedCategory(value);
   };
 
   const filterCategoriesByCategory =
@@ -32,14 +32,10 @@ const Main = () => {
       <Header />
 
       <Categories
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
         handleChange={handleChangeSearchValue}
         searchValue={searchValue}
-        handleClickCategory={handleClickCategory}
       />
       <Products
-        selectedCategory={selectedCategory}
         searchValue={searchValue}
         products={filterCategoriesByCategory}
         setProducts={setProducts}

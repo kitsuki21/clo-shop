@@ -10,7 +10,7 @@ import {
   removeProductToCartAction,
 } from "../../store/addProductToCartReducer";
 
-const Products = ({ products, searchValue, selectedCategory }) => {
+const Products = ({ products, searchValue }) => {
   const dispatch = useDispatch();
   const addProductToCart = useSelector(
     (state) => state.addProductToCart.addProductToCart
@@ -32,7 +32,6 @@ const Products = ({ products, searchValue, selectedCategory }) => {
     <div>
       <ToastContainer autoClose={1000} transition={Slide} />
       <CardProduct
-        selectedCategory={selectedCategory}
         searchValue={searchValue}
         products={products}
         handleClickAddProductToCart={handleClickAddProductToCart}
