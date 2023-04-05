@@ -1,7 +1,9 @@
-async function productsApi() {
-  const response = await fetch("https://fakestoreapi.com/products");
-  const products = await response.json();
-  return products;
-}
+import { getProductsAction } from "../store/productsReducer";
 
-export default productsApi;
+export const productsApi = () => {
+  return (dispatch) => {
+    fetch("https://63e8eea45f3e35d898f7ecf8.mockapi.io/products")
+      .then((response) => response.json())
+      .then((json) => dispatch(getProductsAction(json)));
+  };
+};

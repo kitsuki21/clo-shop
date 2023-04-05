@@ -1,22 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Header from "../components/header/Header";
 import Categories from "../components/category/Categories";
 import Products from "../components/products/Products";
 import Footer from "../components/footer/Footer";
-import productsApi from "../api/productsApi";
+
 import { useSelector } from "react-redux";
 
+import "../App.css";
+
 const Main = () => {
-  const [products, setProducts] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
   const selectedCategory = useSelector(
     (state) => state.selectedCategory.selectedCategory
   );
-
-  useEffect(() => {
-    productsApi().then((products) => setProducts(products));
-  }, []);
+  const products = useSelector((state) => state.products.products);
 
   const handleChangeSearchValue = (e) => {
     setSearchValue(e.target.value);
@@ -28,7 +26,7 @@ const Main = () => {
       : products.filter((item) => item.category === selectedCategory);
 
   return (
-    <div>
+    <div className="App">
       <Header />
 
       <Categories
@@ -38,7 +36,6 @@ const Main = () => {
       <Products
         searchValue={searchValue}
         products={filterCategoriesByCategory}
-        setProducts={setProducts}
       />
       <Footer />
     </div>

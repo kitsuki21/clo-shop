@@ -1,9 +1,9 @@
 import React from "react";
-
 import CardProduct from "../card/CardProduct";
-import { ToastContainer, toast, Slide } from "react-toastify";
 
+import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 import { useDispatch, useSelector } from "react-redux";
 import {
   addProductToCartAction,
@@ -28,6 +28,7 @@ const Products = ({ products, searchValue }) => {
 
   const addToast = () => toast.success("Added to cart !");
   const removeToast = () => toast.success("Remove from cart !");
+
   return (
     <div>
       <ToastContainer autoClose={1000} transition={Slide} />
