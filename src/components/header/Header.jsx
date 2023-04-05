@@ -3,6 +3,7 @@ import st from "./header.module.css";
 import logo from "../../assets/logo.svg";
 import cart from "../../assets/cart.png";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   const countCart = useSelector(
@@ -16,11 +17,20 @@ const Header = () => {
       </div>
       <div className={st.nav}>
         <ul className={st.nav_elem}>
-          <li className={st.elem}>Main</li>
-          <li className={st.elem}>info</li>
-          <li className={st.elem}>Login</li>
           <li className={st.elem}>
-            <img src={cart} alt="cart" />
+            <Link to="/">Main</Link>
+          </li>
+          <li className={st.elem}>
+            <Link to="/info">info</Link>
+          </li>
+          <li className={st.elem}>
+            <Link to="/authorization">Login</Link>
+          </li>
+          <li className={st.elem}>
+            <Link to="/cart">
+              <img src={cart} alt="cart" />
+            </Link>
+
             <span>{countCart.length}</span>
           </li>
         </ul>
