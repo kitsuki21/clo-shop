@@ -11,16 +11,16 @@ import "../App.css";
 const Main = () => {
   const [searchValue, setSearchValue] = useState("");
 
+  const products = useSelector((state) => state.products.products);
   const selectedCategory = useSelector(
     (state) => state.selectedCategory.selectedCategory
   );
-  const products = useSelector((state) => state.products.products);
 
   const handleChangeSearchValue = (e) => {
     setSearchValue(e.target.value);
   };
 
-  const filterCategoriesByCategory =
+  const filterProductsByCategory =
     selectedCategory === "all"
       ? products
       : products.filter((item) => item.category === selectedCategory);
@@ -33,10 +33,7 @@ const Main = () => {
         handleChange={handleChangeSearchValue}
         searchValue={searchValue}
       />
-      <Products
-        searchValue={searchValue}
-        products={filterCategoriesByCategory}
-      />
+      <Products searchValue={searchValue} products={filterProductsByCategory} />
       <Footer />
     </div>
   );

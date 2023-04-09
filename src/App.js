@@ -11,16 +11,16 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route exact path="/info">
+        <Route path="/info">
           <Info />
         </Route>
-        <Route exact path="/cart">
+        <Route path="/cart">
           <CartProducts />
         </Route>
-        <Route exact path="/authorization">
+        <Route path="/authorization">
           <Authorization />
         </Route>
-        <Route path="/">
+        <Route exact path="/">
           <Main />
         </Route>
       </Switch>
