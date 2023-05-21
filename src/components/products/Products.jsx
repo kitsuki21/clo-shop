@@ -3,21 +3,19 @@ import st from "./products.module.css";
 import CardProduct from "../card/CardProduct";
 import { productsApi } from "../../api/productsApi";
 
-import { ToastContainer, toast, Slide } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import { useDispatch, useSelector } from "react-redux";
 import {
   addProductToCartAction,
   removeProductToCartAction,
-} from "../../store/addProductToCartReducer";
+} from "../../store/shoppingCartReducer";
 
 const Products = ({ products, searchValue }) => {
   const dispatch = useDispatch();
 
-  const addProductToCart = useSelector(
-    (state) => state.addProductToCart.addProductToCart
-  );
+  const shoppingCart = useSelector((state) => state.shoppingCart.shoppingCart);
 
   useEffect(() => {
     dispatch(productsApi());
@@ -27,13 +25,18 @@ const Products = ({ products, searchValue }) => {
     return obj.title.toLowerCase().includes(searchValue.toLowerCase());
   });
 
-  const handleClickAddProductToCart = (id) => () => {
-    if (addProductToCart.includes(id) === false) {
-      dispatch(addProductToCartAction(id));
-      addToast();
-    } else {
+  const handleClickAddProductToCart = (id, price) => () => {
+    if (shoppingCart.find((product) => product.id === id)) {
       dispatch(removeProductToCartAction(id));
       removeToast();
+    } else {
+      const product = {
+        id,
+        price,
+        count: 1,
+      };
+      dispatch(addProductToCartAction(product));
+      addToast();
     }
   };
 
@@ -42,7 +45,6 @@ const Products = ({ products, searchValue }) => {
 
   return (
     <div className={st.container_products}>
-      <ToastContainer autoClose={1000} transition={Slide} />
       {searchProducts.map((product) => (
         <CardProduct
           key={product.id}

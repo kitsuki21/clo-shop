@@ -1,27 +1,29 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styles from "./cartProduct.module.css";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  decreaseCountProductAction,
+  increaseCountProductAction,
+  removeProductToCartAction,
+} from "../../store/shoppingCartReducer";
 
 const CartProduct = ({ id, image, title, price }) => {
-  const [countProduct, setCountProduct] = useState(1);
-  const [amountProduct, setAmountProduct] = useState([]);
-
-  useEffect(() => {
-    setAmountProduct([...amountProduct, price]);
-  }, []);
-
-  const totalAmountProduct = amountProduct.reduce(
-    (acc, price) => price + acc,
-    0
+  const { count } = useSelector((state) =>
+    state.shoppingCart.shoppingCart.find((product) => product.id === id)
   );
+  const dispatch = useDispatch();
 
-  const increaseAmountProduct = (price) => () => {
-    setCountProduct((prev) => prev + 1);
-    setAmountProduct([...amountProduct, price]);
+  const totalAmountProduct = count * price;
+
+  const increaseAmountProduct = (id) => () => {
+    dispatch(increaseCountProductAction(id));
+  };
+  const decreaseAmountProduct = (id) => () => {
+    dispatch(decreaseCountProductAction(id));
   };
 
-  const decreaseAmountProduct = () => () => {
-    setCountProduct((prev) => prev - 1);
+  const handleRemoveProductFromCart = (id) => () => {
+    dispatch(removeProductToCartAction(id));
   };
 
   return (
@@ -31,22 +33,26 @@ const CartProduct = ({ id, image, title, price }) => {
         <div className={styles.title_container}>
           <p className={styles.title_product}>{title}</p>
           <div className={styles.count_container}>
-            {countProduct > 1 ? (
+            {count > 1 ? (
               <button
                 className={styles.button_count}
-                onClick={decreaseAmountProduct(price)}
+                onClick={decreaseAmountProduct(id)}
               >
                 -
               </button>
             ) : (
-              <button className={styles.button_count} title="Delete">
+              <button
+                className={styles.button_count}
+                title="Delete"
+                onClick={handleRemoveProductFromCart(id)}
+              >
                 -
               </button>
             )}
-            <p className={styles.count_text}>{countProduct}</p>
+            <p className={styles.count_text}>{count}</p>
             <button
               className={styles.button_count}
-              onClick={increaseAmountProduct(price)}
+              onClick={increaseAmountProduct(id)}
             >
               +
             </button>

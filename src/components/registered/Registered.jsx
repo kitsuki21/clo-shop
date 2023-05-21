@@ -1,18 +1,21 @@
 import React, { useState } from "react";
-import styles from "./loginform.module.css";
+import styles from "./registered.module.css";
 import user from "../../assets/icon_login.png";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { setUser } from "../../store/userSlice";
 import { useHistory } from "react-router-dom";
 
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useDispatch } from "react-redux";
 
-const LoginForm = () => {
-  const [inputValue, setInputValue] = useState({ email: "", password: "" });
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { setUser } from "../../store/userSlice";
+
+const Registered = () => {
+  const [inputValue, setInputValue] = useState({
+    email: "",
+    password: "",
+  });
 
   const dispatch = useDispatch();
-  const push = useHistory();
+  const { push } = useHistory();
 
   const handleChangeInput = (event) => {
     const name = event.target.name;
@@ -20,10 +23,12 @@ const LoginForm = () => {
     setInputValue({ ...inputValue, [name]: value });
   };
 
-  const handleLogin = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
+
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, inputValue.email, inputValue.password)
+
+    createUserWithEmailAndPassword(auth, inputValue.email, inputValue.password)
       .then(({ user }) => {
         dispatch(
           setUser({
@@ -67,19 +72,16 @@ const LoginForm = () => {
             placeholder="Password"
           />
         </div>
-        <button className={styles.button} type="submit" onClick={handleLogin}>
-          Login
+        <button
+          className={styles.button}
+          type="submit"
+          onClick={handleRegister}
+        >
+          Sign up
         </button>
-        <p className={styles.text}>
-          Not registered?{" "}
-          <Link to="/registered" className={styles.a}>
-            {" "}
-            Create an account{" "}
-          </Link>
-        </p>
       </form>
     </article>
   );
 };
 
-export default LoginForm;
+export default Registered;

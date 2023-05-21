@@ -13,9 +13,7 @@ const CardProduct = ({
   rating,
   handleClickAddProductToCart,
 }) => {
-  const addProductToCart = useSelector(
-    (state) => state.addProductToCart.addProductToCart
-  );
+  const shoppingCart = useSelector((state) => state.shoppingCart.shoppingCart);
 
   return (
     <div className={st.card} key={id}>
@@ -34,9 +32,9 @@ const CardProduct = ({
       </div>
       <button
         className={st.button_add}
-        onClick={handleClickAddProductToCart(id)}
+        onClick={handleClickAddProductToCart(id, price)}
       >
-        {addProductToCart.includes(id) ? (
+        {shoppingCart.find((product) => product.id === id) ? (
           <img className={st.img_cart} src={addCart} alt="" />
         ) : (
           <img className={st.img_cart} src={cart} alt="" />

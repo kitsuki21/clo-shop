@@ -4,16 +4,18 @@ import {
   legacy_createStore as createStore,
 } from "@reduxjs/toolkit";
 
-import { addProductToCartReducer } from "./addProductToCartReducer";
+import { shoppingCartReducer } from "./shoppingCartReducer";
 import { selectedCategoryReducer } from "./selectedCategoryReducer";
 import thunk from "redux-thunk";
 import { productsReducer } from "./productsReducer";
 import { composeWithDevTools } from "redux-devtools-extension";
+import userReducer from "./userSlice";
 
 const rootReducer = combineReducers({
   products: productsReducer,
-  addProductToCart: addProductToCartReducer,
+  shoppingCart: shoppingCartReducer,
   selectedCategory: selectedCategoryReducer,
+  user: userReducer,
 });
 
 export const store = createStore(

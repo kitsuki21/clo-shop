@@ -6,15 +6,16 @@ import CartProduct from "../cart-product/CartProduct";
 
 const Cart = () => {
   const products = useSelector((state) => state.products.products);
-  const addProductToCart = useSelector(
-    (state) => state.addProductToCart.addProductToCart
-  );
-
+  const shoppingCart = useSelector((state) => state.shoppingCart.shoppingCart);
   const filterAddProduct = products.filter((product) =>
-    addProductToCart.includes(product.id)
+    shoppingCart.find(({ id }) => product.id === id)
   );
 
-  console.log(filterAddProduct);
+  const amountProduct = shoppingCart.reduce((acc, item) => acc + item.count, 0);
+  const totalPrice = shoppingCart.reduce(
+    (acc, item) => acc + item.count * item.price,
+    0
+  );
 
   return (
     <div className={styles.cart_container}>
@@ -40,12 +41,14 @@ const Cart = () => {
               <div className={styles.wrapper_info_order}>
                 <div className={styles.left_col}>
                   <p className={styles.text_info_order}>Total</p>
-                  <p className={styles.text_col}>1 product</p>
+                  <p className={styles.text_col}>{amountProduct} product</p>
                   <p className={styles.text_col}>Delivery</p>
                 </div>
                 <div className={styles.right_col}>
-                  <p className={styles.text_info_order}>125$</p>
-                  <p className={styles.text_col}>125$</p>
+                  <p className={styles.text_info_order}>
+                    {totalPrice.toFixed([2])}$
+                  </p>
+                  <p className={styles.text_col}>{totalPrice.toFixed([2])}$</p>
                   <p className={styles.text_col}>—</p>
                 </div>
               </div>

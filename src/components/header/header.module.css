@@ -26,3 +26,7 @@
   display: flex;
   align-items: center;
 }
+
+.user_logo {
+  width: 44px;
+}
