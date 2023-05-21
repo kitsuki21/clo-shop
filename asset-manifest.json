@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/my-app/static/css/main.ae8f5d9b.css",
+    "main.js": "/my-app/static/js/main.9c2cc795.js",
+    "static/media/logo.svg": "/my-app/static/media/logo.19f0dafca018c2c034be660a3d94fe3e.svg",
+    "static/media/addcart.svg": "/my-app/static/media/addcart.590b0250d9f55aa9b09fd40b373c97c0.svg",
+    "index.html": "/my-app/index.html",
+    "main.ae8f5d9b.css.map": "/my-app/static/css/main.ae8f5d9b.css.map",
+    "main.9c2cc795.js.map": "/my-app/static/js/main.9c2cc795.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ae8f5d9b.css",
+    "static/js/main.9c2cc795.js"
+  ]
+}
